@@ -30,3 +30,7 @@ replace the default vite styles in index.css with
 @tailwind components;
 @tailwind utilities;
 ```
+
+### setup shadcn/ui
+
+https://ui.shadcn.com/docs/installation/vite
