@@ -14,6 +14,7 @@ import {
 } from "./utils/external-history";
 import { allNodes } from "./all-nodes";
 import { theme } from "./theme";
+import { Toolbar } from "./toolbar/toolbar";
 
 const placeholder = "Enter some rich text...";
 
@@ -46,33 +47,36 @@ function EditorPlugins() {
   const { historyState } = useEditorHistoryState();
 
   return (
-    <div className="editor-inner relative md:prose-lg">
-      <RichTextPlugin
-        contentEditable={
-          <ContentEditable
-            className="editor-input bg-white block relative outline-none p-10 pb-10 min-h-36"
-            aria-placeholder={placeholder}
-            placeholder={
-              <div className="text-neutral-500 overflow-hidden absolute overflow-ellipsis top-10 left-10 right-7 select-none whitespace-nowrap inline-block pointer-events-none">
-                {placeholder}
-              </div>
-            }
-          />
-        }
-        ErrorBoundary={LexicalErrorBoundary}
-      />
-      <ListPlugin />
-      <LinkPlugin />
-      <TablePlugin hasCellMerge={false} hasCellBackgroundColor={false} />
-      <OnChangePlugin
-        ignoreSelectionChange
-        onChange={(editorState) => {
-          const stateString = JSON.stringify(editorState.toJSON());
-          window.localStorage.setItem("editorState", stateString);
-        }}
-      />
-      <HistoryPlugin externalHistoryState={historyState} />
-      <AutoFocusPlugin />
-    </div>
+    <>
+      <Toolbar />
+      <div className="editor-inner relative md:prose-lg">
+        <RichTextPlugin
+          contentEditable={
+            <ContentEditable
+              className="editor-input bg-white block relative outline-none p-10 pb-10 min-h-36"
+              aria-placeholder={placeholder}
+              placeholder={
+                <div className="text-neutral-500 overflow-hidden absolute overflow-ellipsis top-10 left-10 right-7 select-none whitespace-nowrap inline-block pointer-events-none">
+                  {placeholder}
+                </div>
+              }
+            />
+          }
+          ErrorBoundary={LexicalErrorBoundary}
+        />
+        <ListPlugin />
+        <LinkPlugin />
+        <TablePlugin hasCellMerge={false} hasCellBackgroundColor={false} />
+        <OnChangePlugin
+          ignoreSelectionChange
+          onChange={(editorState) => {
+            const stateString = JSON.stringify(editorState.toJSON());
+            window.localStorage.setItem("editorState", stateString);
+          }}
+        />
+        <HistoryPlugin externalHistoryState={historyState} />
+        <AutoFocusPlugin />
+      </div>
+    </>
   );
 }
