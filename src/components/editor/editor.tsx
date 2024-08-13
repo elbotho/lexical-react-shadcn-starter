@@ -15,6 +15,7 @@ import {
 import { allNodes } from "./all-nodes";
 import { theme } from "./theme";
 import { Toolbar } from "./toolbar/toolbar";
+import { MarkdownShortcutsPlugin } from "@/plugins/markdown-shortcuts";
 
 const placeholder = "Enter some rich text...";
 
@@ -74,6 +75,7 @@ function EditorPlugins() {
             window.localStorage.setItem("editorState", stateString);
           }}
         />
+        <MarkdownShortcutsPlugin />
         <HistoryPlugin externalHistoryState={historyState} />
         <AutoFocusPlugin />
       </div>
