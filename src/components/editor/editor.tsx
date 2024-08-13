@@ -50,7 +50,7 @@ function EditorPlugins() {
   return (
     <>
       <Toolbar />
-      <div className="editor-inner relative md:prose-lg">
+      <div className="editor-inner relative prose md:prose-lg">
         <RichTextPlugin
           contentEditable={
             <ContentEditable
