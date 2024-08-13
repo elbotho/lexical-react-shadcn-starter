@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { ToolbarButton, ToolbarToggleItem } from "@/components/ui/toolbar";
 import {
   Tooltip,
   TooltipContent,
@@ -7,13 +7,14 @@ import {
 } from "@/components/ui/tooltip";
 import { isMac } from "@/utils/client-detection";
 
-export function ToolbarButton({
+export function ToolbarItem({
   tooltipText,
   ariaLabel,
   icon,
   onClick,
   toggleState,
   disabled,
+  value,
 }: {
   tooltipText: string;
   ariaLabel: string;
@@ -21,25 +22,36 @@ export function ToolbarButton({
   onClick: () => void;
   toggleState?: boolean;
   disabled?: boolean;
+  value?: string;
 }) {
   function replaceCtrl(text: string) {
     return isMac ? text.replace("Ctrl", "⌘") : text;
   }
-
   return (
     <TooltipProvider delayDuration={100}>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button
-            aria-pressed={toggleState}
-            aria-label={replaceCtrl(ariaLabel)}
-            disabled={disabled}
-            data-disabled={disabled ? "" : undefined}
-            onClick={onClick}
-            variant={toggleState ? "secondary" : "ghost"}
-          >
-            {icon}
-          </Button>
+          {value ? (
+            <ToolbarToggleItem
+              value={value}
+              aria-label={replaceCtrl(ariaLabel)}
+              disabled={disabled}
+              data-state={toggleState ? "on" : "off"}
+              onClick={onClick}
+            >
+              {icon}
+            </ToolbarToggleItem>
+          ) : (
+            <ToolbarButton
+              size="sm"
+              variant="ghost"
+              aria-label={replaceCtrl(ariaLabel)}
+              disabled={disabled}
+              onClick={onClick}
+            >
+              {icon}
+            </ToolbarButton>
+          )}
         </TooltipTrigger>
         <TooltipContent>
           <p>{replaceCtrl(tooltipText)}</p>
