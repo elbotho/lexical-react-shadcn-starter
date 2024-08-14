@@ -181,6 +181,9 @@ export function useToolbarStatus() {
 
   const insertLink = useCallback(() => {
     const url = isLink ? null : "";
+    setTimeout(() => {
+      document.getElementById("floating-link-menu-input")?.focus();
+    }, 10);
     return activeEditor.dispatchCommand(TOGGLE_LINK_COMMAND, url);
   }, [activeEditor, isLink]);
 

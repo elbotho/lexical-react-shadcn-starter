@@ -1,6 +1,7 @@
 import {
   BoldIcon,
   ItalicIcon,
+  LinkIcon,
   ListIcon,
   ListOrderedIcon,
   QuoteIcon,
@@ -22,12 +23,14 @@ export function Toolbar() {
     editor,
     isBold,
     isItalic,
+    isLink,
     blockType,
     canUndo,
     canRedo,
     toggleQuote,
     toggleUnorderedList,
     toggleOrderedList,
+    insertLink,
   } = useToolbarStatus();
 
   return (
@@ -80,6 +83,13 @@ export function Toolbar() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
             }}
+          />
+          <ToolbarItem
+            toggleState={isLink}
+            tooltipText="Link (Ctrl+K)"
+            ariaLabel="Insert or edit a link. Shortcut: Ctrl+K"
+            icon={<LinkIcon />}
+            onClick={() => insertLink()}
           />
         </ToolbarToggleGroup>
         <Separator orientation="vertical" />

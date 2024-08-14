@@ -18,6 +18,7 @@ import { Toolbar } from "./toolbar/toolbar";
 import { MarkdownShortcutsPlugin } from "@/plugins/markdown-shortcuts";
 import { useState } from "react";
 import DraggableBlockPlugin from "@/plugins/draggable-blocks";
+import { FloatingLinkMenu } from "@/plugins/floating-link-menu";
 
 const placeholder = "Enter some rich text...";
 
@@ -80,6 +81,7 @@ function EditorPlugins() {
 
         {wrappingElement && (
           <>
+            <FloatingLinkMenu />
             <DraggableBlockPlugin wrappingElement={wrappingElement} />
           </>
         )}
