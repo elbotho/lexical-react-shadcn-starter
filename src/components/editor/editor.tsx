@@ -16,6 +16,8 @@ import { allNodes } from "./all-nodes";
 import { theme } from "./theme";
 import { Toolbar } from "./toolbar/toolbar";
 import { MarkdownShortcutsPlugin } from "@/plugins/markdown-shortcuts";
+import { useState } from "react";
+import DraggableBlockPlugin from "@/plugins/draggable-blocks";
 
 const placeholder = "Enter some rich text...";
 
@@ -47,10 +49,17 @@ export function Editor() {
 function EditorPlugins() {
   const { historyState } = useEditorHistoryState();
 
+  const [wrappingElement, setWrappingElement] = useState<HTMLDivElement | null>(
+    null
+  );
+
   return (
     <>
       <Toolbar />
-      <div className="editor-inner relative prose md:prose-lg">
+      <div
+        className="editor-inner relative prose md:prose-lg"
+        ref={(elem) => setWrappingElement(elem)}
+      >
         <RichTextPlugin
           contentEditable={
             <ContentEditable
@@ -68,6 +77,13 @@ function EditorPlugins() {
         <ListPlugin />
         <LinkPlugin />
         <TablePlugin hasCellMerge={false} hasCellBackgroundColor={false} />
+
+        {wrappingElement && (
+          <>
+            <DraggableBlockPlugin wrappingElement={wrappingElement} />
+          </>
+        )}
+
         <OnChangePlugin
           ignoreSelectionChange
           onChange={(editorState) => {
