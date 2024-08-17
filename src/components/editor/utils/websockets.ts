@@ -9,7 +9,7 @@ export function createWebsocketProvider(
   const doc = getDocFromMap(id, yjsDocMap);
 
   return new WebsocketProvider(
-    `ws://y-websocket-experiment.glitch.me:80`,
+    `wss://y-websocket-lexical-experiment.glitch.me`,
     id,
     doc,
     {
