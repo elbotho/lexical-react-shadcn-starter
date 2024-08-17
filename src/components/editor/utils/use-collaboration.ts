@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Provider } from "@lexical/yjs";
 import * as Y from "yjs";
-import { createWebRTCProvider, createWebsocketProvider } from "./websockets";
+import { createWebsocketProvider } from "./websockets";
 import { getRandomAnimal } from "./animal-data";
 
 export interface UserData {
@@ -13,11 +13,7 @@ export interface UserData {
 
 const randomAnimal = getRandomAnimal();
 
-export function useCollaboration({
-  providerName = "websocket",
-}: {
-  providerName?: string;
-}) {
+export function useCollaboration() {
   const [provider, setProvider] = useState<Provider | null>(null);
   const [users, setUsers] = useState<UserData[]>([]);
 
@@ -46,16 +42,13 @@ export function useCollaboration({
 
   const providerFactory = useCallback(
     (id: string, yjsDocMap: Map<string, Y.Doc>) => {
-      const provider =
-        providerName === "webrtc"
-          ? createWebRTCProvider(id, yjsDocMap)
-          : createWebsocketProvider(id, yjsDocMap);
+      const provider = createWebsocketProvider(id, yjsDocMap);
 
       setTimeout(() => setProvider(provider));
 
       return provider;
     },
-    [providerName]
+    []
   );
 
   return {

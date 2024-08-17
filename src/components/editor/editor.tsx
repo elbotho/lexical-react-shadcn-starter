@@ -38,7 +38,7 @@ export function Editor() {
 }
 
 function EditorPlugins() {
-  const { providerFactory, user, users } = useCollaboration({});
+  const { providerFactory, user, users } = useCollaboration();
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
