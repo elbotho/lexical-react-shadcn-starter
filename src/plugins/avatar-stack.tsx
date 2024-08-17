@@ -11,11 +11,10 @@ export function AvatarStack({ users }: { users: UserData[] }) {
     <ul className="flex absolute right-3 top-3 space-x-1.5">
       {users.map(({ name, userId, color, emoji }) => {
         return (
-          <TooltipProvider delayDuration={100}>
+          <TooltipProvider delayDuration={100} key={userId}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <li
-                  key={userId}
                   className="text-center text-3xl w-12 h-12 rounded-full pt-1.5"
                   style={{ backgroundColor: color + "77" }}
                 >
