@@ -37,9 +37,14 @@ export function createWebsocketProvider(
 ) {
   const doc = getDocFromMap(id, yjsDocMap);
 
-  return new WebsocketProvider("ws://localhost:1234", id, doc, {
-    connect: false,
-  }) as unknown as Provider;
+  return new WebsocketProvider(
+    "wss://free.blr2.piesocket.com/v3/1?api_key=YBq41qdKGqeSarakl0UKrBSddial8LiGRpbvMfvV&notify_self=1",
+    id,
+    doc,
+    {
+      connect: false,
+    }
+  ) as unknown as Provider;
 }
 
 function getDocFromMap(id: string, yjsDocMap: Map<string, Y.Doc>): Y.Doc {

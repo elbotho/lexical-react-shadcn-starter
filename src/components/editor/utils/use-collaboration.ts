@@ -14,7 +14,7 @@ export interface UserData {
 const randomAnimal = getRandomAnimal();
 
 export function useCollaboration({
-  providerName = "webrtc",
+  providerName = "websocket",
 }: {
   providerName?: string;
 }) {

@@ -67,7 +67,7 @@ function EditorPlugins() {
         <TablePlugin hasCellMerge={false} hasCellBackgroundColor={false} />
         <MarkdownShortcutsPlugin />
         <CollaborationPlugin
-          id="default-room"
+          id="1"
           providerFactory={providerFactory}
           shouldBootstrap={true}
           cursorsContainerRef={containerRef}
