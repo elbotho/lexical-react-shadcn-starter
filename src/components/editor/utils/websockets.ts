@@ -8,10 +8,8 @@ export function createWebsocketProvider(
 ) {
   const doc = getDocFromMap(id, yjsDocMap);
 
-  const wsProtocol = window.location.protocol == "https:" ? "wss" : "ws";
-
   return new WebsocketProvider(
-    `${wsProtocol}://y-websocket-experiment.glitch.me:80`,
+    `ws://y-websocket-experiment.glitch.me:80`,
     id,
     doc,
     {
